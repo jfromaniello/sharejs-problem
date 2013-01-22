@@ -16,10 +16,11 @@ var redisUrl = url.parse(process.env.REDISTOGO_URL);
 //setup share
 share.attach(app, {
   db: {
-    type: 'redis',
+    type:     'redis',
     hostname: redisUrl.hostname,
-    port: redisUrl.port,
-    auth: redisUrl.auth
+    port:     redisUrl.port,
+    auth:     redisUrl.auth,
+    prefix:   process.env.REDIS_PREFIX || 'super'
   }
   // db: {type: 'none'} or redis
 });
