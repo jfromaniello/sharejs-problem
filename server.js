@@ -6,13 +6,21 @@ var share = require('share').server;
 var app = express();
 var port = process.env.PORT || 8080;
 
+
 app.configure(function(){
   this.use(express.static(__dirname  + "/public"));
 });
 
+var url = require('url');
+var redisUrl = url.parse(process.env.REDISTOGO_URL);
 //setup share
 share.attach(app, {
-  db: {type: 'none'}
+  db: {
+    type: 'redis',
+    hostname: redisUrl.hostname,
+    port: redisUrl.port,
+    auth: redisUrl.auth
+  }
   // db: {type: 'none'} or redis
 });
 
