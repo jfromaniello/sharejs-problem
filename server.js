@@ -13,6 +13,7 @@ app.configure(function(){
 //setup share
 share.attach(app, {
   db: {type: 'none'}
+  // db: {type: 'none'} or redis
 });
 
 http.createServer(app).listen(port, function(){
